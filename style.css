@@ -206,3 +206,43 @@ img {
   background: #1b5e20;
   transform: scale(1.1);
 }
+body {
+    background-color: #0a0a0a; /* Umukara mwinshi */
+    color: #00ff41; /* Icyatsi kibengerana (Matrix Green) */
+    font-family: 'Courier New', Courier, monospace;
+    text-align: center;
+    margin: 0;
+    padding: 20px;
+}
+
+h2 {
+    text-shadow: 0 0 10px #00ff41;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+}
+
+.card {
+    background: #1a1a1a;
+    border: 1px solid #00ff41;
+    border-radius: 15px;
+    padding: 20px;
+    margin: 20px auto;
+    max-width: 400px;
+    box-shadow: 0 0 15px rgba(0, 255, 65, 0.2);
+}
+
+button {
+    background-color: #00ff41;
+    color: black;
+    border: none;
+    padding: 15px 25px;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button:hover {
+    background-color: #008f11;
+    box-shadow: 0 0 20px #00ff41;
+}
