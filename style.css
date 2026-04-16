@@ -246,3 +246,27 @@ button:hover {
     background-color: #008f11;
     box-shadow: 0 0 20px #00ff41;
 }
+.footer-custom {
+    margin-top: 60px; /* Ibi bituma kajya kure y'ibindi bintu */
+    padding-bottom: 20px;
+    font-family: 'Courier New', monospace;
+    font-size: 12px;
+    letter-spacing: 3px;
+    color: rgba(0, 255, 65, 0.6); /* Icyatsi kinyereye (Transparent Green) */
+}
+
+.brand-name {
+    color: #00ff41;
+    font-weight: bold;
+    text-shadow: 0 0 8px #00ff41;
+}
+
+/* Akanyandiko k'umuriro munsi ya Footer */
+.line-glow {
+    width: 50px;
+    height: 2px;
+    background-color: #00ff41;
+    margin: 10px auto;
+    box-shadow: 0 0 10px #00ff41;
+    border-radius: 10px;
+}
